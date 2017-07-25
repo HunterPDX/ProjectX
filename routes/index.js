@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var dbFunctions = require('../db/dbFunctions');
+
+var knex 	= require('../db/db');
+var mysql   = require('mysql');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,8 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/subjects', function(req, res, next) {
-  var newFunction = new dbFunctions("subjects");
-  console.log(newFunction.find(1));
+  	knex('subjects').then(function(data){
+		console.log(data);
+	});
 });
+
 
 module.exports = router;
